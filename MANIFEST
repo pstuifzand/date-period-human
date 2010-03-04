@@ -1,0 +1,6 @@
+lib/Date/Period/Human.pm
+MANIFEST
+MANIFEST.SKIP
+t/use.t
+Build.PL
+META.yml

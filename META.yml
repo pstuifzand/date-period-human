@@ -1,0 +1,20 @@
+---
+name: Date-Period-Human
+version: v0.1.0
+author: []
+abstract: Human readable date periods
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  Date::Calc: 0
+configure_requires:
+  Module::Build: 0.35
+provides:
+  Date::Period::Human:
+    file: lib/Date/Period/Human.pm
+    version: v0.1.0
+generated_by: Module::Build version 0.35
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
