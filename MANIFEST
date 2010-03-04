@@ -4,3 +4,4 @@ MANIFEST.SKIP
 t/use.t
 Build.PL
 META.yml
+README
