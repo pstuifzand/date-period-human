@@ -1,4 +1,5 @@
 use Test::More;
+use Test::Exception;
 use Date::Period::Human;
 
 my @tests =(
@@ -22,6 +23,8 @@ my $d = Date::Period::Human->new({today_and_now => [2010,3,5,10,15,0]  });
 for (@tests) {
     is($d->human_readable($_->[0]), $_->[1]);
 }
+
+lives_ok { my $d2 = Date::Period::Human->new(); $d2->human_readable('2010-01-01 00:00:00') };
 
 done_testing();
 

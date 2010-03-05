@@ -28,7 +28,8 @@ sub human_readable {
 
     my (@date) = _parse_mysql_date($date);
 
-    my @now =  @{$self->{today_and_now}};
+    my @now =  ref($self->{today_and_now}) eq 'ARRAY' ? @{$self->{today_and_now}} : ();
+
     if (!@now) {
         @now = Today_and_Now(0);
     }
