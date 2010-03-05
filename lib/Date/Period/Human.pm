@@ -1,5 +1,6 @@
 package Date::Period::Human;
 use strict;
+use warnings;
 use Carp;
 
 use Date::Calc qw/Delta_DHMS Today_and_Now/;
@@ -7,8 +8,8 @@ use Date::Calc qw/Delta_DHMS Today_and_Now/;
 our $VERSION='0.1.0';
 
 sub new {
-    my ($klass) = @_;
-    my $self = {};
+    my ($klass, $args) = @_;
+    my $self = { today_and_now => $args->{today_and_now} };
     return bless $self, $klass;
 }
 
@@ -26,7 +27,11 @@ sub human_readable {
 
     my (@date) = _parse_mysql_date($date);
 
-    my ($Dd,$Dh,$Dm,$Ds) = Delta_DHMS(@date, Today_and_Now(0));
+    my @now =  @{$self->{today_and_now}};
+    if (!@now) {
+        @now = Today_and_Now(0);
+    }
+    my ($Dd,$Dh,$Dm,$Ds) = Delta_DHMS(@date,@now);
 
     if ($Dd > 10) {
         return $date[2] . '-' . $date[1] . '-' . $date[0];

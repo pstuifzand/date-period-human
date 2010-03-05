@@ -2,6 +2,8 @@ lib/Date/Period/Human.pm
 MANIFEST
 MANIFEST.SKIP
 t/use.t
+t/parse.t
+t/readable.t
 Build.PL
 META.yml
 README

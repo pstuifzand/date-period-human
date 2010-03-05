@@ -1,3 +1,4 @@
+use strict;
 use Test::More tests => 7;
 
 use Test::Exception;
@@ -14,6 +15,7 @@ my @should_fail = (
     '01-01-2001 00:00',
     '2001-01-20 00:00',
 );
+
 for (@should_fail) {
     dies_ok { Date::Period::Human::_parse_mysql_date($_) };
 }
