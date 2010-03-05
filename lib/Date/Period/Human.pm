@@ -16,9 +16,10 @@ sub new {
 sub _parse_mysql_date {
     my ($mysql_date) = @_;
 
-    if ($mysql_date =~ m/^(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})$/) {
+    if ($mysql_date && $mysql_date =~ m/^(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})$/) {
         return $1, $2, $3, $4, $5, $6;
     }
+    $mysql_date ||= '';
     croak "Not a MySQL date: [$mysql_date]";
 }
 
@@ -65,7 +66,7 @@ sub translate {
 
     my %translation = (
         time_num_days_ago           => '%d dagen geleden',
-        time_yesterday_at           => 'gister om %02d:%02d',
+        time_yesterday_at           => 'gisteren om %02d:%02d',
         time_hour_min_ago           => '%d uur %d minuten geleden',
         time_minute_ago             => '%d minuut geleden',
         time_minutes_ago            => '%d minuten geleden',
