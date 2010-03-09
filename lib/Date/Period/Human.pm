@@ -5,11 +5,14 @@ use Carp;
 
 use Date::Calc qw/Delta_DHMS Today_and_Now/;
 
-our $VERSION='0.1.0';
+our $VERSION='0.2.0';
 
 sub new {
     my ($klass, $args) = @_;
-    my $self = { today_and_now => $args->{today_and_now} };
+    my $self = { 
+        today_and_now => $args->{today_and_now},
+        lang          => $args->{lang} || 'nl',
+    };
     return bless $self, $klass;
 }
 
@@ -28,7 +31,7 @@ sub human_readable {
 
     my (@date) = _parse_mysql_date($date);
 
-    my @now =  ref($self->{today_and_now}) eq 'ARRAY' ? @{$self->{today_and_now}} : ();
+    my @now = ref($self->{today_and_now}) eq 'ARRAY' ? @{$self->{today_and_now}} : ();
 
     if (!@now) {
         @now = Today_and_Now(0);
@@ -66,16 +69,27 @@ sub translate {
     my ($self, $key, @values) = @_;
 
     my %translation = (
-        time_num_days_ago           => '%d dagen geleden',
-        time_yesterday_at           => 'gisteren om %02d:%02d',
-        time_hour_min_ago           => '%d uur %d minuten geleden',
-        time_minute_ago             => '%d minuut geleden',
-        time_minutes_ago            => '%d minuten geleden',
-        time_less_than_minute_ago   => 'minder dan een minuut geleden',
-        time_just_now               => 'net precies',
+        nl => {
+            time_num_days_ago           => '%d dagen geleden',
+            time_yesterday_at           => 'gisteren om %02d:%02d',
+            time_hour_min_ago           => '%d uur %d minuten geleden',
+            time_minute_ago             => '%d minuut geleden',
+            time_minutes_ago            => '%d minuten geleden',
+            time_less_than_minute_ago   => 'minder dan een minuut geleden',
+            time_just_now               => 'net precies',
+        },
+        en => {
+            time_num_days_ago           => '%d days ago',
+            time_yesterday_at           => 'yesterday at %02d:%02d',
+            time_hour_min_ago           => '%d hour %d minutes ago',
+            time_minute_ago             => '%d minute ago',
+            time_minutes_ago            => '%d minutes ago',
+            time_less_than_minute_ago   => 'less than a minute ago',
+            time_just_now               => 'just now',
+        },
     );
 
-    return sprintf($translation{$key}, @values);
+    return sprintf($translation{$self->{lang}}{$key}, @values);
 }
 
 1;
