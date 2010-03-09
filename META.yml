@@ -1,7 +1,8 @@
 ---
 name: Date-Period-Human
-version: v0.1.0
-author: []
+version: v0.3.0
+author:
+  - 'Peter Stuifzand <peter@stuifzand.eu>'
 abstract: Human readable date periods
 license: perl
 resources:
@@ -13,7 +14,7 @@ configure_requires:
 provides:
   Date::Period::Human:
     file: lib/Date/Period/Human.pm
-    version: v0.1.0
+    version: v0.3.0
 generated_by: Module::Build version 0.35
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html

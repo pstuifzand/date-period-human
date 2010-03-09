@@ -5,7 +5,7 @@ use Carp;
 
 use Date::Calc qw/Delta_DHMS Today_and_Now/;
 
-our $VERSION='0.2.0';
+our $VERSION='0.3.0';
 
 sub new {
     my ($klass, $args) = @_;
@@ -42,30 +42,30 @@ sub human_readable {
         return $date[2] . '-' . $date[1] . '-' . $date[0];
     }
     elsif ($Dd > 1) {
-        return $self->translate('time_num_days_ago', $Dd);
+        return $self->_translate('time_num_days_ago', $Dd);
     }
     elsif ($Dd == 1) {
-        return $self->translate('time_yesterday_at', $date[3], $date[4]);
+        return $self->_translate('time_yesterday_at', $date[3], $date[4]);
     }
     elsif ($Dd == 0 && $Dh >= 1) {
-        return $self->translate('time_hour_min_ago', $Dh, $Dm);
+        return $self->_translate('time_hour_min_ago', $Dh, $Dm);
     }
     elsif ($Dd == 0 && $Dh == 0 && $Dm > 0) {
         if ($Dm == 1) {
-            return $self->translate('time_minute_ago', $Dm);
+            return $self->_translate('time_minute_ago', $Dm);
         }
-        return $self->translate('time_minutes_ago', $Dm);
+        return $self->_translate('time_minutes_ago', $Dm);
     }
     elsif ($Dd == 0 && $Dh == 0 && $Dm == 0 && $Ds > 5) {
-        return $self->translate('time_less_than_minute_ago');
+        return $self->_translate('time_less_than_minute_ago');
     }
     else {
-        return $self->translate('time_just_now');
+        return $self->_translate('time_just_now');
     }
     return;
 }
 
-sub translate {
+sub _translate {
     my ($self, $key, @values) = @_;
 
     my %translation = (
@@ -98,11 +98,67 @@ sub translate {
 
 Date::Period::Human - Human readable date periods
 
-=head1 DESCRIPTION
-
 =head1 SYNOPSYS
 
+    # Create the Date::Period::Human object
+    my $d = Date::Period::Human->new();
+
+    # Get a relative human readable date string
+    my $s = $d->human_readable('2010-01-01 02:30:42');
+
+    # Now $s contains the relative date
+
+=head1 DESCRIPTION
+
+Creates a string of relative time. This is useful when you're showing user
+created content, where it's nicer to show how long ago the item was posted
+instead of the date and time.
+
+This also solves the problem where you don't know the timezone of the user who
+is viewing the item. This is solved because you show relative time instead of
+absolute time in most cases. 
+
+There is one case that isn't relative.
+
+=head1 CLASS METHODS
+
+This class contains one public class method.
+
+=head2 new [options]
+
+=over 4
+
+=item lang
+
+The language you want to use. Default 'nl', can be 'en' for English.
+
+=item today_and_now
+
+An arrayref containing [ $year, $month, $day, $hour, $min, $sec ].
+
+Will be used as the fixed point from which the relative time will be calculated.
+
+=back
+
+=head1 METHODS
+
+This class contains one public method.
+
+=head2 $self->human_readable($mysql_date)
+
+Parses the $mysql_date and returns a human readable time string.
+
+=head1 HOMEPAGE
+
+http://github.com/pstuifzand/date-period-human
+
+=head1 AUTHOR
+
+Peter Stuifzand <peter@stuifzand.eu>
+
+=head1 COPYRIGHT
+
+Copyright 2010 Peter Stuifzand
 
 =cut
-
 
