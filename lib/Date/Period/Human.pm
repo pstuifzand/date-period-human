@@ -69,6 +69,15 @@ sub _translate {
     my ($self, $key, @values) = @_;
 
     my %translation = (
+        de => {
+            time_num_days_ago           => 'vor %d Tagen',
+            time_yesterday_at           => 'Gestern um %02d:%02d',
+            time_hour_min_ago           => 'vor %d Stunden %d Minuten',
+            time_minute_ago             => 'vor %d Minute',
+            time_minutes_ago            => 'vor %d Minuten',
+            time_less_than_minute_ago   => 'vor weniger als einer Minute',
+            time_just_now               => 'gerade eben',
+        },
         nl => {
             time_num_days_ago           => '%d dagen geleden',
             time_yesterday_at           => 'gisteren om %02d:%02d',
