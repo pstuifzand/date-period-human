@@ -5,7 +5,7 @@ use Carp;
 
 use Date::Calc qw/Delta_DHMS Today_and_Now/;
 
-our $VERSION='0.3.2';
+our $VERSION='0.4.0';
 
 sub new {
     my ($klass, $args) = @_;
@@ -25,11 +25,21 @@ sub _parse_mysql_date {
     $mysql_date ||= '';
     croak "Not a MySQL date: [$mysql_date]";
 }
+sub _parse_datetime {
+}
+
+sub _get_date_parts {
+    my ($self, $date) = @_;
+    if (ref($date)) {
+        return ($date->year, $date->month, $date->day, $date->hour, $date->minute, $date->second);
+    }
+    return _parse_mysql_date($date);
+}
 
 sub human_readable {
     my ($self, $date) = @_;
 
-    my (@date) = _parse_mysql_date($date);
+    my (@date) = $self->_get_date_parts($date);
 
     my @now = ref($self->{today_and_now}) eq 'ARRAY' ? @{$self->{today_and_now}} : ();
 

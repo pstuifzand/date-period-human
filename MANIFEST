@@ -4,6 +4,7 @@ MANIFEST.SKIP
 t/use.t
 t/parse.t
 t/readable.t
+t/datetime.t
 Build.PL
 META.yml
 README
