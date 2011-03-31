@@ -163,9 +163,11 @@ Will be used as the fixed point from which the relative time will be calculated.
 
 This class contains one public method.
 
-=head2 $self->human_readable($mysql_date)
+=head2 $self->human_readable($mysql_date|$datetime)
 
 Parses the $mysql_date and returns a human readable time string.
+
+Or, $datetime (a DateTime object) and returns a human readable time string.
 
 =head1 HOMEPAGE
 
