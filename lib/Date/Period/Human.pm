@@ -25,8 +25,6 @@ sub _parse_mysql_date {
     $mysql_date ||= '';
     croak "Not a MySQL date: [$mysql_date]";
 }
-sub _parse_datetime {
-}
 
 sub _get_date_parts {
     my ($self, $date) = @_;
