@@ -1,6 +1,7 @@
 lib/Date/Period/Human.pm
 MANIFEST
 MANIFEST.SKIP
+CONTRIBUTORS
 t/use.t
 t/parse.t
 t/readable.t
