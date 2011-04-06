@@ -49,13 +49,13 @@ sub human_readable {
     if ($Dy == 1) {
         return $self->_translate('time_a_year_ago');
     }
-    elsif($Dy > 1 ) {
+    elsif ($Dy > 1) {
         return $self->_translate('time_years_ago', $Dy);
     }
-    elsif($DM == 1) {
+    elsif ($DM == 1) {
         return $self->_translate('time_a_month_ago');
     }
-    elsif($DM > 1) {
+    elsif ($DM > 1) {
         return $self->_translate('time_months_ago', $DM);
     }
     elsif ($Dd >= 7) {
