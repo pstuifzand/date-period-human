@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Carp;
 
-use Date::Calc qw/Delta_DHMS Today_and_Now/;
+use Date::Calc qw/Delta_DHMS Today_and_Now N_Delta_YMDHMS/;
 
 our $VERSION='0.4.0';
 
@@ -44,10 +44,27 @@ sub human_readable {
     if (!@now) {
         @now = Today_and_Now(0);
     }
-    my ($Dd,$Dh,$Dm,$Ds) = Delta_DHMS(@date,@now);
+    my ($Dy, $DM, $Dd,$Dh,$Dm,$Ds) = N_Delta_YMDHMS(@date,@now);
 
-    if ($Dd > 10) {
-        return $date[2] . '-' . $date[1] . '-' . $date[0];
+    if ($Dy == 1) {
+        return $self->_translate('time_a_year_ago');
+    }
+    elsif($Dy > 1 ) {
+        return $self->_translate('time_years_ago', $Dy);
+    }
+    elsif($DM == 1) {
+        return $self->_translate('time_a_month_ago');
+    }
+    elsif($DM > 1) {
+        return $self->_translate('time_months_ago', $DM);
+    }
+    elsif ($Dd >= 7) {
+        if (int($Dd / 7) == 1) {
+            return $self->_translate('time_a_week_ago', 1);
+        }
+        if (int $Dd / 7 > 1) {
+            return $self->_translate('time_weeks_ago', int($Dd / 7));
+        }
     }
     elsif ($Dd > 1) {
         return $self->_translate('time_num_days_ago', $Dd);
@@ -78,6 +95,12 @@ sub _translate {
 
     my %translation = (
         de => {
+            time_months_ago             => 'vor %d Monaten',
+            time_a_month_ago            => 'vor einem Monat',
+            time_years_ago              => 'vor %d Jahren',
+            time_a_year_ago             => 'vor einem Jahr',
+            time_weeks_ago              => 'vor %d Wochen',
+            time_a_week_ago             => 'vor einer Woche',
             time_num_days_ago           => 'vor %d Tagen',
             time_yesterday_at           => 'Gestern um %02d:%02d',
             time_hour_min_ago           => 'vor %d Stunden %d Minuten',
@@ -87,6 +110,12 @@ sub _translate {
             time_just_now               => 'gerade eben',
         },
         nl => {
+            time_months_ago             => '%d maanden geleden',
+            time_a_month_ago            => '%d maand geleden',
+            time_years_ago              => '%d jaar geleden',
+            time_a_year_ago             => 'een jaar geleden',
+            time_a_week_ago             => 'een week geleden',
+            time_weeks_ago              => '%d weken geleden',
             time_num_days_ago           => '%d dagen geleden',
             time_yesterday_at           => 'gisteren om %02d:%02d',
             time_hour_min_ago           => '%d uur %d minuten geleden',
@@ -96,6 +125,12 @@ sub _translate {
             time_just_now               => 'net precies',
         },
         en => {
+            time_months_ago             => '%d months ago',
+            time_a_month_ago            => 'a month ago',
+            time_years_ago              => '%d years ago',
+            time_a_year_ago             => 'a year ago',
+            time_a_week_ago             => 'a week ago',
+            time_weeks_ago              => '%d weeks ago',
             time_num_days_ago           => '%d days ago',
             time_yesterday_at           => 'yesterday at %02d:%02d',
             time_hour_min_ago           => '%d hour %d minutes ago',
