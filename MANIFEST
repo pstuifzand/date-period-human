@@ -9,3 +9,4 @@ t/datetime.t
 Build.PL
 META.yml
 README
+META.json

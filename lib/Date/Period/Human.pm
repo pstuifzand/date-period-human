@@ -111,7 +111,7 @@ sub _translate {
         },
         nl => {
             time_months_ago             => '%d maanden geleden',
-            time_a_month_ago            => '%d maand geleden',
+            time_a_month_ago            => 'een maand geleden',
             time_years_ago              => '%d jaar geleden',
             time_a_year_ago             => 'een jaar geleden',
             time_a_week_ago             => 'een week geleden',

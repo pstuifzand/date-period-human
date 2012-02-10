@@ -1,3 +1,4 @@
+use strict;
 use Test::More;
 use Test::Exception;
 use Date::Period::Human;
@@ -16,6 +17,7 @@ my @tests =(
     [ '2010-03-05 10:00:00', '15 minuten geleden',             '15 minutes ago',         'vor 15 Minuten' ],
     [ '2010-03-04 10:15:00', 'gisteren om 10:15',              'yesterday at 10:15',     'Gestern um 10:15' ],
     [ '2010-03-01 10:00:00', '4 dagen geleden',                '4 days ago',             'vor 4 Tagen' ],
+    [ '2010-02-01 10:00:00', 'een maand geleden',              'a month ago',            'vor einem Monat' ],
 );
 
 my $d = Date::Period::Human->new({lang => 'nl', today_and_now => [2010,3,5,10,15,0]});
