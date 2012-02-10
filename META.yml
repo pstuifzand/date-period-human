@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   Module::Build: 0.38
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,7 +15,7 @@ name: Date-Period-Human
 provides:
   Date::Period::Human:
     file: lib/Date/Period/Human.pm
-    version: v0.4.0
+    version: v0.4.2
 requires:
   Date::Calc: 0
 resources:
