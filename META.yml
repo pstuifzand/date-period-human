@@ -20,4 +20,4 @@ requires:
   Date::Calc: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: v0.4.0
+version: v0.4.2
