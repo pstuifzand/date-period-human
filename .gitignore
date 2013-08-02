@@ -1,0 +1,6 @@
+/Date-Period-Human-*
+/.build
+/_build*
+/Build
+MYMETA.*
+!META.json
