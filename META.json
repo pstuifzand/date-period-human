@@ -4,7 +4,7 @@
       "Peter Stuifzand <peter@stuifzand.eu>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v0.9.7, Dist::Zilla version 4.300032, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Milla version v1.0.3, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -26,7 +26,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.025"
+            "Module::Build::Tiny" : "0.030"
          }
       },
       "develop" : {
@@ -36,8 +36,14 @@
       },
       "runtime" : {
          "requires" : {
-            "Date::Calc" : "0",
-            "DateTime::Format::MySQL" : "0"
+            "Date::Calc" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "DateTime::Format::MySQL" : "0",
+            "Test::Exception" : "0",
+            "Test::More" : "0.88"
          }
       }
    },
@@ -53,8 +59,9 @@
          "web" : "https://github.com/pstuifzand/date-period-human"
       }
    },
-   "version" : "0.4.3",
+   "version" : "0.4.4",
    "x_contributors" : [
+      "MAJESTIC <majestic@cpan.org>",
       "Peter Stuifzand <peter.stuifzand@gmail.com>"
    ]
 }

@@ -5,7 +5,7 @@ use Carp;
 
 use Date::Calc qw/Delta_DHMS Today_and_Now N_Delta_YMDHMS/;
 
-our $VERSION='0.4.3';
+our $VERSION='0.4.4';
 
 sub new {
     my ($klass, $args) = @_;
