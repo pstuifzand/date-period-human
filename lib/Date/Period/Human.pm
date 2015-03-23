@@ -1,4 +1,5 @@
 package Date::Period::Human;
+
 use strict;
 use warnings;
 use Carp;
@@ -6,6 +7,8 @@ use Carp;
 use Date::Calc qw/Delta_DHMS Today_and_Now N_Delta_YMDHMS/;
 
 our $VERSION='0.4.4';
+
+use utf8; # umlauts in translations
 
 sub new {
     my ($klass, $args) = @_;
@@ -46,6 +49,7 @@ sub human_readable {
     }
     my ($Dy, $DM, $Dd,$Dh,$Dm,$Ds) = N_Delta_YMDHMS(@date,@now);
 
+    ## the past
     if ($Dy == 1) {
         return $self->_translate('time_a_year_ago');
     }
@@ -62,7 +66,7 @@ sub human_readable {
         if (int($Dd / 7) == 1) {
             return $self->_translate('time_a_week_ago', 1);
         }
-        if (int $Dd / 7 > 1) {
+        if (int($Dd / 7) > 1) {
             return $self->_translate('time_weeks_ago', int($Dd / 7));
         }
     }
@@ -84,6 +88,64 @@ sub human_readable {
     elsif ($Dd == 0 && $Dh == 0 && $Dm == 0 && $Ds > 5) {
         return $self->_translate('time_less_than_minute_ago');
     }
+
+    ## the future
+    elsif ($Dy == 0 && $DM < -12) { # ?? N_Delta_YMDHMS counts 1 year + 3 month as DM = 15 while Dy = 0
+        if (abs(int($DM / 12)) == 1) {
+            return $self->_translate('time_in_over_year');
+        }
+    }
+    elsif ($Dy < 0) {
+        if($Dy == -1){
+            if ($DM < 0) {
+                return $self->_translate('time_in_over_year', abs(int($DM / 12)) );
+            }
+            return $self->_translate('time_in_year', $Dy * -1);
+        }else{
+            if ($DM < 0) {
+                return $self->_translate('time_in_over_years', $Dy * -1 );
+            }
+            return $self->_translate('time_in_years', $Dy * -1);
+        }
+    }
+    elsif ($DM < 0) {
+        if ($DM == -1) {
+            return $self->_translate('time_in_month', $DM * -1 );
+        }
+        return $self->_translate('time_in_months',$DM * -1);
+    }
+    elsif ($Dd <= -2) {
+        if (abs($Dd / 7) == 1) {
+            return $self->_translate('time_in_week', 1);
+        }
+        elsif ($Dd % 7 == 0) {
+            return $self->_translate('time_in_weeks', abs(int($Dd / 7)));
+        }
+        return $self->_translate('time_in_num_days', ($Dd * -1) );
+    }
+    elsif ($Dd == -1) {
+        if ($Dh < 0) {
+            return $self->_translate('time_after_tomorrow_at', $date[3], $date[4]);
+        }
+        return $self->_translate('time_tomorrow_at', $date[3], $date[4]);
+    }
+    elsif ($Dd == 0 && $Dh <= -1) {
+        if ($Dh == -1) {
+            return $self->_translate('time_in_hour_minutes', $Dh * -1, $Dm * -1);
+        }
+        return $self->_translate('time_in_hours_minutes', $Dh * -1, $Dm * -1);
+    }
+    elsif ($Dd == 0 && $Dh == 0 && $Dm < 0) {
+        if ($Dm == -1) {
+            return $self->_translate('time_in_minute', $Dm * -1);
+        }
+        return $self->_translate('time_in_minutes', $Dm * -1);
+    }
+    elsif ($Dd == 0 && $Dh == 0 && $Dm == 0 && $Ds < -5) {
+        return $self->_translate('time_in_less_than_minute', $Ds * -1);
+    }
+
+
     else {
         return $self->_translate('time_just_now');
     }
@@ -108,6 +170,23 @@ sub _translate {
             time_minutes_ago            => 'vor %d Minuten',
             time_less_than_minute_ago   => 'vor weniger als einer Minute',
             time_just_now               => 'gerade eben',
+
+            time_in_less_than_minute    => 'in %d Sekunden',
+            time_in_minute              => 'in %d Minute',
+            time_in_minutes             => 'in %d Minuten',
+            time_in_hour_minutes        => 'in %d Stunde %d Minuten',
+            time_in_hours_minutes       => 'in %d Stunde %d Minuten',
+            time_tomorrow_at            => 'Morgen um %02d:%02d',
+            time_after_tomorrow_at      => 'Übermorgen um %02d:%02d',
+            time_in_num_days            => 'in %d Tagen',
+            time_in_week                => 'in %d Woche',
+            time_in_weeks               => 'in %d Wochen',
+            time_in_month               => 'in %d Monat',
+            time_in_months              => 'in %d Monaten',
+            time_in_year                => 'in %d Jahr',
+            time_in_over_year           => 'in über einem Jahr',
+            time_in_years               => 'in %d Jahren',
+            time_in_over_years          => 'in über %d Jahren',
         },
         nl => {
             time_months_ago             => '%d maanden geleden',
@@ -123,6 +202,23 @@ sub _translate {
             time_minutes_ago            => '%d minuten geleden',
             time_less_than_minute_ago   => 'minder dan een minuut geleden',
             time_just_now               => 'net precies',
+
+            time_in_less_than_minute    => 'in %d seconden',
+            time_in_minute              => 'in %d minute',
+            time_in_minutes             => 'in %d minuten',
+            time_in_hour_minutes        => 'in %d uur %d minuten',
+            time_in_hours_minutes       => 'in %d uur %d minuten',
+            time_tomorrow_at            => 'morgen een %02d:%02d',
+            time_after_tomorrow_at      => 'de dag nar morgen een %02d:%02d',
+            time_in_num_days            => 'in %d fagen',
+            time_in_week                => 'in %d week',
+            time_in_weeks               => 'in %d weken',
+            time_in_month               => 'in %d maand',
+            time_in_months              => 'in %d maanden',
+            time_in_year                => 'in %d jaar',
+            time_in_over_year           => 'in mer dan een jaar',
+            time_in_years               => 'in %d jaar',
+            time_in_over_years          => 'in mer dan %d jaar',
         },
         en => {
             time_months_ago             => '%d months ago',
@@ -138,6 +234,23 @@ sub _translate {
             time_minutes_ago            => '%d minutes ago',
             time_less_than_minute_ago   => 'less than a minute ago',
             time_just_now               => 'just now',
+
+            time_in_less_than_minute    => 'in %d seconds',
+            time_in_minute              => 'in %d minute',
+            time_in_minutes             => 'in %d minutes',
+            time_in_hour_minutes        => 'in %d hour %d minutes',
+            time_in_hours_minutes       => 'in %d hours %d minutes',
+            time_tomorrow_at            => 'tomorrow at %02d:%02d',
+            time_after_tomorrow_at      => 'the day after tomorrow at %02d:%02d',
+            time_in_num_days            => 'in %d days',
+            time_in_week                => 'in %d week',
+            time_in_weeks               => 'in %d weeks',
+            time_in_month               => 'in %d month',
+            time_in_months              => 'in %d months',
+            time_in_year                => 'in %d year',
+            time_in_over_year           => 'in over a year',
+            time_in_years               => 'in %d years',
+            time_in_over_years          => 'in over %d years',
         },
     );
 
