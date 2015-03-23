@@ -31,16 +31,30 @@ sub _parse_mysql_date {
 
 sub _get_date_parts {
     my ($self, $date) = @_;
+
     if (ref($date)) {
         return ($date->year, $date->month, $date->day, $date->hour, $date->minute, $date->second);
     }
+
+    if ($date =~ /^\d+$/o){
+	my @x = gmtime($date);
+	return (
+		$x[5]+1900,
+		$x[4]+1,
+		$x[3],
+		$x[2],
+		$x[1],
+		$x[0]
+	);
+    }
+
     return _parse_mysql_date($date);
 }
 
 sub human_readable {
     my ($self, $date) = @_;
 
-    my (@date) = $self->_get_date_parts($date);
+    my @date = $self->_get_date_parts($date);
 
     my @now = ref($self->{today_and_now}) eq 'ARRAY' ? @{$self->{today_and_now}} : ();
 
@@ -309,11 +323,13 @@ Will be used as the fixed point from which the relative time will be calculated.
 
 This class contains one public method.
 
-=head2 $self->human_readable($mysql_date|$datetime)
+=head2 $self->human_readable($mysql_date|$datetime|$epoch)
 
 Parses the $mysql_date and returns a human readable time string.
 
 Or, $datetime (a DateTime object) and returns a human readable time string.
+
+Or, $epoch (identified by regex /^\d+$/) and passed through gmtime().
 
 =head1 HOMEPAGE
 
