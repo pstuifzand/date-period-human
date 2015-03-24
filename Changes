@@ -1,6 +1,7 @@
 Changes for Date-Period-Human
 
 {{$NEXT}}
+		- Support future dates (Thanks, isync)
 
 0.4.4  2013-12-23 12:56:43 CET
 		- Fix testing dependencies
