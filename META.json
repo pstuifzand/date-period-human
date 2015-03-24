@@ -59,7 +59,7 @@
          "web" : "https://github.com/pstuifzand/date-period-human"
       }
    },
-   "version" : "0.4.4",
+   "version" : "0.4.5",
    "x_contributors" : [
       "MAJESTIC <majestic@cpan.org>",
       "Peter Stuifzand <peter.stuifzand@gmail.com>",

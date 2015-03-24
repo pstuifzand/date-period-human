@@ -1,6 +1,8 @@
 Changes for Date-Period-Human
 
 {{$NEXT}}
+
+0.4.5  2015-03-24 20:14:03 CET
 		- Support future dates (Thanks, isync)
 
 0.4.4  2013-12-23 12:56:43 CET
