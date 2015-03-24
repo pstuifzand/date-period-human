@@ -44,11 +44,13 @@ This class contains one public class method.
 
 This class contains one public method.
 
-## $self->human\_readable($mysql\_date|$datetime)
+## $self->human\_readable($mysql\_date|$datetime|$epoch)
 
 Parses the $mysql\_date and returns a human readable time string.
 
 Or, $datetime (a DateTime object) and returns a human readable time string.
+
+Or, $epoch (identified by regex /^\\d+$/) and passed through gmtime().
 
 # HOMEPAGE
 
