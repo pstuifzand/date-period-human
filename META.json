@@ -60,11 +60,13 @@
          "web" : "https://github.com/pstuifzand/date-period-human"
       }
    },
-   "version" : "0.4.5",
+   "version" : "0.4.6",
    "x_contributors" : [
-      "isync <O.Zucker@web.de>",
+      "David Precious <davidp@preshweb.co.uk>",
+      "MAJESTIC <majestic@cpan.org>",
+      "Peter Stuifzand <peter.stuifzand@gmail.com>",
       "Peter Stuifzand <peter@stuifzand.eu>",
-      "Peter Stuifzand <peter.stuifzand@gmail.com>"
+      "isync <O.Zucker@web.de>"
    ]
 }
 
