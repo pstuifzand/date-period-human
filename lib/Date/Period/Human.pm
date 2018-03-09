@@ -6,7 +6,7 @@ use Carp;
 
 use Date::Calc qw/Delta_DHMS Today_and_Now N_Delta_YMDHMS/;
 
-our $VERSION='0.4.5';
+our $VERSION='0.4.6';
 
 use utf8; # umlauts in translations
 

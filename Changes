@@ -1,6 +1,8 @@
 Changes for Date-Period-Human
 
 {{$NEXT}}
+		- Support "en_short" language, for shorthand relative dates (Thanks
+		bigpresh)
 
 0.4.5  2015-03-24 20:14:03 CET
 		- Support future dates (Thanks, isync)

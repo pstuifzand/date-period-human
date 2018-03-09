@@ -10,17 +10,21 @@ Date::Period::Human - Human readable date periods
     # Get a relative human readable date string
     my $s = $d->human_readable('2010-01-01 02:30:42');
 
-    # Now $s contains the relative date
+    # Now $s contains the relative date in human readable form, e.g. "1 year
+    # ago", "3 weeks ago", etc.
+
+    # Use English instead of the default Dutch
+    # my $d = Date::Period::Human->new({ lang => 'en' });
 
 # DESCRIPTION
 
 Creates a string of relative time. This is useful when you're showing user
 created content, where it's nicer to show how long ago the item was posted
-instead of the date and time.
+(e.g. "3 weeks ago") instead of the date and time.
 
 This also solves the problem where you don't know the timezone of the user who
 is viewing the item. This is solved because you show relative time instead of
-absolute time in most cases. 
+absolute time in most cases.
 
 There is one case that isn't relative.
 

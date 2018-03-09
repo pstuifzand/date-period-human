@@ -63,10 +63,9 @@
    "version" : "0.4.6",
    "x_contributors" : [
       "David Precious <davidp@preshweb.co.uk>",
-      "MAJESTIC <majestic@cpan.org>",
-      "Peter Stuifzand <peter.stuifzand@gmail.com>",
+      "isync <O.Zucker@web.de>",
       "Peter Stuifzand <peter@stuifzand.eu>",
-      "isync <O.Zucker@web.de>"
+      "Peter Stuifzand <peter.stuifzand@gmail.com>"
    ]
 }
 
