@@ -56,6 +56,10 @@ Or, $epoch (identified by regex /^\\d+$/) and passed through gmtime().
 
 http://github.com/pstuifzand/date-period-human
 
+# LICENSE
+
+This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+
 # AUTHOR
 
 Peter Stuifzand <peter@stuifzand.eu>
