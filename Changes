@@ -1,6 +1,8 @@
 Changes for Date-Period-Human
 
 {{$NEXT}}
+
+0.4.6  2018-03-09 07:33:14 CET
 		- Support "en_short" language, for shorthand relative dates (Thanks
 		bigpresh)
 
