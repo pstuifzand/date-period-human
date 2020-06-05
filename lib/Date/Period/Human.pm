@@ -299,8 +299,9 @@ sub human_readable {
 
 sub _translate {
     my ($self, $key, @values) = @_;
-
-    return sprintf($translation{$self->{lang}}{$key}, @values);
+    my $phrase = $translation{$self->{lang}}{$key};
+    return sprintf $phrase, @values if $phrase =~ /%/;
+    return $phrase;
 }
 
 1;
