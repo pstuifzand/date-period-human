@@ -1,6 +1,8 @@
 Changes for Date-Period-Human
 
 {{$NEXT}}
+
+0.4.8  2020-06-05 21:26:07 CEST
 		- Fix sprintf warnings (Thanks isync)
 		  https://github.com/pstuifzand/date-period-human/issues/6
 
